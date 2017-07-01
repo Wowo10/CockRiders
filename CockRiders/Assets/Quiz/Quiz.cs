@@ -57,6 +57,8 @@ public class Quiz : MonoBehaviour {
     }
 
     List<Question> questions;
+    public char actualanswer;
+    float timeleft;
 
     void Start() {
         string temp = ReadString();
@@ -74,7 +76,7 @@ public class Quiz : MonoBehaviour {
             questions.Add(new Question(qs.Split(';')));
         }
 
-        Show();
+        gameObject.SetActive(false);
 
     }
 	
@@ -82,8 +84,15 @@ public class Quiz : MonoBehaviour {
 		
 	}
 
-    void Show()
+    void FixedUpdate()
     {
+        timeleft -= Time.deltaTime;
+    }
+
+    public void Show()
+    {
+        gameObject.SetActive(true);
+
         Text[] texts = gameObject.GetComponentsInChildren<Text>();
 
         int index = Random.Range(0,questions.Count-1);
@@ -92,6 +101,22 @@ public class Quiz : MonoBehaviour {
         texts[1].text = questions[index].aans;
         texts[2].text = questions[index].bans;
         texts[3].text = questions[index].cans;
+
+        timeleft = 30.0f;
+    }
+
+
+
+    public bool IsEnd()
+    {        
+        if(timeleft <= 0)
+        {
+            gameObject.SetActive(false);
+
+            return true;
+        }    
+
+        return false;
     }
 
 }

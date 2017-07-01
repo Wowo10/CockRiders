@@ -8,12 +8,19 @@ public class PlayerBehaviour : MonoBehaviour
     public float maxvelocity = 10.0f; //times that max velocity is bigger that speed
     public float startvelocity = 0.0f;
 
-    string axis;
+    public char currentanswer;
+
+    string fire, jump, aans, bans, cans;
     Rigidbody2D rb;
 
     void Start()
     {
-        axis = "Fire" + (playernumber + 1);
+        fire = "Fire" + (playernumber + 1);
+        jump = "Jump" + (playernumber + 1);
+        aans = "Aanswer" + (playernumber + 1);
+        bans = "Banswer" + (playernumber + 1);
+        cans = "Canswer" + (playernumber + 1);
+
         rb = gameObject.GetComponent<Rigidbody2D>();
 
         maxvelocity = speed * maxvelocity;
@@ -50,8 +57,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     void FixedUpdate()
     {
-
-        if (Input.GetButtonDown(axis))
+        if (Input.GetButtonDown(fire))
         {
             float brake = 1 - (rb.velocity.x / maxvelocity);
             rb.velocity += Vector2.right * speed * brake;
@@ -63,5 +69,40 @@ public class PlayerBehaviour : MonoBehaviour
             if (rb.velocity.x < 0)
                 rb.velocity = Vector3.zero;
         }
+
+        if (Input.GetButtonDown(jump))
+        {
+            //some timer and jump mechanic
+        }
+        else
+        {
+            //callback?
+        }
+
+        if (Input.GetButtonDown(aans))
+        {
+            currentanswer = 'a';
+        }
+
+        if (Input.GetButtonDown(bans))
+        {
+            currentanswer = 'b';
+        }
+
+        if (Input.GetButtonDown(cans))
+        {
+            currentanswer = 'c';
+        }
     }
+
+    public void WinQuiz()
+    {
+        Debug.Log(name + " has won");
+    }
+
+    public void LoseQuiz()
+    {
+        Debug.Log(name + " has lost");
+    }
+
 }
