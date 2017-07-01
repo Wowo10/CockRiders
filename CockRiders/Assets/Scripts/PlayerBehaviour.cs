@@ -46,5 +46,11 @@ public class PlayerBehaviour : MonoBehaviour {
         
     }
 
-
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("FinishLine"))
+        {
+            Debug.Log(name + " won!!!!!!1111one");
+        }
+    }
 }
