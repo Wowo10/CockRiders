@@ -33,8 +33,6 @@ public class PlayerBehaviour : MonoBehaviour {
 
         if (Input.GetButtonDown(axis))
         {
-            Debug.Log(rb.velocity.x / maxvelocity);
-
             float brake = 1 - (rb.velocity.x / maxvelocity);
             rb.velocity += Vector2.right * speed * brake;
         }
