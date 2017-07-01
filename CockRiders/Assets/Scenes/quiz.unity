@@ -745,7 +745,7 @@ MonoBehaviour:
   - {fileID: 2114014706}
   - {fileID: 482494376}
   - {fileID: 1789114831}
-  quiz: {fileID: 0}
+  quiz: {fileID: 1519991702}
 --- !u!1001 &1331779603
 Prefab:
   m_ObjectHideFlags: 0
