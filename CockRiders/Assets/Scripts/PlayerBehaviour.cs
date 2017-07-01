@@ -77,82 +77,82 @@ public class PlayerBehaviour : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Input.GetButtonDown(fire))
-        {
-            float brake = 1 - (rb.velocity.x / maxVelocityTemp);
-            rb.velocity += Vector2.right * speed * brake;
-            
-            if (particles != null)
+            if (Input.GetButtonDown(fire))
             {
-                ParticleSystem ps;
-                
-                ps = Instantiate(particles, gameObject.transform);
-                ps.transform.position = gameObject.transform.position;                  
+                float brake = 1 - (rb.velocity.x / maxVelocityTemp);
+                rb.velocity += Vector2.right * speed * brake;
 
-                Destroy(ps.gameObject,ps.main.duration);
+                if (particles != null)
+                {
+                    ParticleSystem ps;
+
+                    ps = Instantiate(particles, gameObject.transform);
+                    ps.transform.position = gameObject.transform.position;
+
+                    Destroy(ps.gameObject, ps.main.duration);
+                }
+
             }
-
-        }
-        else
-        {
-            rb.velocity += Vector2.right * speed * friction * -1;
-
-            if (rb.velocity.x < 0)
-                rb.velocity = new Vector3(0, rb.velocity.y, 0);
-        }
-
-        if (Input.GetButtonDown(jump))
-        {
-            if (rb.velocity.y >= 0.0f - Mathf.Epsilon && rb.velocity.y <= 0.0f + Mathf.Epsilon)
-                OnJump();
-        }
-
-
-        if(transform.position.y > groundLevelY)
-        {
-            rb.AddForce(new Vector2(0, -30.81f), ForceMode2D.Force);
-        }
-        else if (transform.position.y < groundLevelY)
-        {
-            transform.SetPositionAndRotation(new Vector3(transform.position.x, groundLevelY, transform.position.z), Quaternion.identity);
-            rb.velocity = new Vector3(rb.velocity.x, 0, 0); ;
-        }
-        transform.rotation = Quaternion.Slerp(Quaternion.Euler(new Vector3(0, 0, knockedRotation)), Quaternion.identity, knockedTimer);
-
-        if (isKnocked)
-        {
-            knockedTimer -= Time.deltaTime;
-            if (knockedTimer < 0.0f)
-            {
-                isKnocked = false;
-                isResetingLerp = true;
-            }
-        }
-        if (isResetingLerp)
-        {
-            if (knockedTimer < 1.0f)
-                knockedTimer += Time.deltaTime;
             else
             {
-                knockedTimer = 1.0f;
-                isResetingLerp = false;
+                rb.velocity += Vector2.right * speed * friction * -1;
+
+                if (rb.velocity.x < 0)
+                    rb.velocity = new Vector3(0, rb.velocity.y, 0);
             }
-        }
-        
-        if (Input.GetButtonDown(aans))
-        {
-            currentanswer = 'a';
-        }
 
-        if (Input.GetButtonDown(bans))
-        {
-            currentanswer = 'b';
-        }
+            if (Input.GetButtonDown(jump))
+            {
+                if (rb.velocity.y >= 0.0f - Mathf.Epsilon && rb.velocity.y <= 0.0f + Mathf.Epsilon)
+                    OnJump();
+            }
 
-        if (Input.GetButtonDown(cans))
-        {
-            currentanswer = 'c';
-        }
+
+            if (transform.position.y > groundLevelY)
+            {
+                rb.AddForce(new Vector2(0, -30.81f), ForceMode2D.Force);
+            }
+            else if (transform.position.y < groundLevelY)
+            {
+                transform.SetPositionAndRotation(new Vector3(transform.position.x, groundLevelY, transform.position.z), Quaternion.identity);
+                rb.velocity = new Vector3(rb.velocity.x, 0, 0); ;
+            }
+            transform.rotation = Quaternion.Slerp(Quaternion.Euler(new Vector3(0, 0, knockedRotation)), Quaternion.identity, knockedTimer);
+
+            if (isKnocked)
+            {
+                knockedTimer -= Time.deltaTime;
+                if (knockedTimer < 0.0f)
+                {
+                    isKnocked = false;
+                    isResetingLerp = true;
+                }
+            }
+            if (isResetingLerp)
+            {
+                if (knockedTimer < 1.0f)
+                    knockedTimer += Time.deltaTime;
+                else
+                {
+                    knockedTimer = 1.0f;
+                    isResetingLerp = false;
+                }
+            }
+
+            if (Input.GetButtonDown(aans))
+            {
+                currentanswer = 'a';
+            }
+
+            if (Input.GetButtonDown(bans))
+            {
+                currentanswer = 'b';
+            }
+
+            if (Input.GetButtonDown(cans))
+            {
+                currentanswer = 'c';
+            }
     }
 
     public void WinQuiz()

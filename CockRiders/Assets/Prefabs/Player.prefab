@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 212336747110290284}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,7 +107,11 @@ MonoBehaviour:
   currentanswer: 0
   jumpHeight: 20
   jumpForce: 10
+  particles: {fileID: 0}
   groundLevelY: 0
+  knockedRotation: 30
+  knockedTimer: 1
+  isResetingLerp: 0
 --- !u!212 &212336747110290284
 SpriteRenderer:
   m_ObjectHideFlags: 1
