@@ -34,6 +34,20 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            OnObstacleHit();
+        }
+    }
+
+    private void OnObstacleHit()
+    {
+        Debug.Log(name + " is retarded");
+        //TODO
+    }
+
     void FixedUpdate()
     {
 
