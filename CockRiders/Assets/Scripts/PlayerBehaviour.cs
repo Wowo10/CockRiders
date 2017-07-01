@@ -7,12 +7,12 @@ public class PlayerBehaviour : MonoBehaviour
     public float friction = 0.05f;
     public float maxvelocity = 10.0f; //times that max velocity is bigger that speed
     public float startvelocity = 0.0f;
-
-    public char currentanswer;
+    public char currentanswer = '0';
     public float jumpHeight = 20.0f;
     public float jumpForce = 10.0f;
     
     public float groundLevelY;
+
     string fire, jump, aans, bans, cans;
     Rigidbody2D rb;
 
@@ -109,11 +109,13 @@ public class PlayerBehaviour : MonoBehaviour
     public void WinQuiz()
     {
         Debug.Log(name + " has won");
+        currentanswer = '0';
     }
 
     public void LoseQuiz()
     {
         Debug.Log(name + " has lost");
+        currentanswer = '0';
     }
 
     private void OnJump()
