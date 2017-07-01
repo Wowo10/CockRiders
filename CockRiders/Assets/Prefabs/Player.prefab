@@ -100,8 +100,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playernumber: 0
-  speed: 10
-  friction: 0.1
+  speed: 50
+  friction: 0.07
   maxvelocity: 10
   startvelocity: 0
   currentanswer: 0
@@ -110,7 +110,7 @@ MonoBehaviour:
   particles: {fileID: 198988221595153714, guid: f73f3813546fae44a9759cbaf150f78b,
     type: 2}
   groundLevelY: 0
-  knockedRotation: 30
+  knockedRotation: 50
   knockedTimer: 1
   isResetingLerp: 0
 --- !u!212 &212336747110290284
