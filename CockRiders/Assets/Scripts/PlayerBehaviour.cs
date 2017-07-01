@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class PlayerBehaviour : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class PlayerBehaviour : MonoBehaviour
     public char currentanswer = '0';
     public float jumpHeight = 20.0f;
     public float jumpForce = 10.0f;
+    public ParticleSystem particles;
     
     public float groundLevelY;
 
@@ -63,6 +65,17 @@ public class PlayerBehaviour : MonoBehaviour
         {
             float brake = 1 - (rb.velocity.x / maxvelocity);
             rb.velocity += Vector2.right * speed * brake;
+            
+            if (particles != null)
+            {
+                ParticleSystem ps;
+                
+                ps = Instantiate(particles, gameObject.transform);
+                ps.transform.position = gameObject.transform.position;                  
+
+                Destroy(ps.gameObject,ps.main.duration);
+            }
+
         }
         else
         {
