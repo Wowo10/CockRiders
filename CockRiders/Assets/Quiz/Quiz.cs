@@ -102,7 +102,7 @@ public class Quiz : MonoBehaviour {
         texts[2].text = questions[index].bans;
         texts[3].text = questions[index].cans;
 
-        timeleft = 30.0f;
+        timeleft = 10.0f;
     }
 
 
