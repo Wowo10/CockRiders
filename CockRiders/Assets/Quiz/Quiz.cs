@@ -58,6 +58,7 @@ public class Quiz : MonoBehaviour {
 
     List<Question> questions;
     public char actualanswer;
+    float timeleft;
 
     void Start() {
         string temp = ReadString();
@@ -83,6 +84,11 @@ public class Quiz : MonoBehaviour {
 		
 	}
 
+    void FixedUpdate()
+    {
+        timeleft -= Time.deltaTime;
+    }
+
     public void Show()
     {
         gameObject.SetActive(true);
@@ -96,17 +102,19 @@ public class Quiz : MonoBehaviour {
         texts[2].text = questions[index].bans;
         texts[3].text = questions[index].cans;
 
-        //timer.start()
+        timeleft = 30.0f;
     }
 
+
+
     public bool IsEnd()
-    {
-        /*
-        if(timer.elapsed <= 0)
+    {        
+        if(timeleft <= 0)
         {
-            
-        }
-    */
+            gameObject.SetActive(false);
+
+            return true;
+        }    
 
         return false;
     }

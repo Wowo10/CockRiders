@@ -79,6 +79,16 @@ public class PlayerBehaviour : MonoBehaviour
         {
             currentanswer = 'c';
         }
-
     }
+
+    public void WinQuiz()
+    {
+        Debug.Log(name + " has won");
+    }
+
+    public void LoseQuiz()
+    {
+        Debug.Log(name + " has lost");
+    }
+
 }
