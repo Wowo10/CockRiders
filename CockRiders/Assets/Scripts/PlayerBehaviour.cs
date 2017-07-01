@@ -6,18 +6,23 @@ public class PlayerBehaviour : MonoBehaviour {
 
     public int playernumber;
     public float speed = 10.0f;
+    public float friction = 0.05f;
+    public float maxvelocity = 10.0f; //times that max velocity is bigger that speed
+    public float startvelocity = 0.0f;
 
     string axis;
-    Rigidbody rb;
+    Rigidbody2D rb;
 
-    // Use this for initialization
     void Start ()
     {
         axis = "Fire" + (playernumber + 1);
-        rb = gameObject.GetComponent(typeof(Rigidbody)) as Rigidbody;
+        rb = gameObject.GetComponent<Rigidbody2D>();
+
+        maxvelocity = speed * maxvelocity;
+
+        rb.velocity = gameObject.transform.right * 0 * speed;
     }
 	
-	// Update is called once per frame
 	void Update ()
     {
         
@@ -28,11 +33,17 @@ public class PlayerBehaviour : MonoBehaviour {
 
         if (Input.GetButtonDown(axis))
         {
-            rb.velocity = gameObject.transform.right * speed;
+            Debug.Log(rb.velocity.x / maxvelocity);
+
+            float brake = 1 - (rb.velocity.x / maxvelocity);
+            rb.velocity += Vector2.right * speed * brake;
         }
         else
         {
-            rb.velocity = new Vector3(0, 0, 0);
+            rb.velocity += Vector2.right * speed * friction * -1;
+
+            if (rb.velocity.x < 0)
+                rb.velocity = Vector3.zero;
         }
         
     }
