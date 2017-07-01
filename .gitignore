@@ -34,7 +34,7 @@ sysinfo.txt
 *.unitypackage
 
 #Library directory
-/Library/
+/Library/*
 
 #Temp directory
-/Temp/
+/Temp/*
