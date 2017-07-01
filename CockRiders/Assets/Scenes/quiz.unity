@@ -446,11 +446,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4724042034239532, guid: 1bd4b58130f34624d815fbd66e6cc6bb, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -6.310837
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 4724042034239532, guid: 1bd4b58130f34624d815fbd66e6cc6bb, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 14.827423
+      value: 8.9
       objectReference: {fileID: 0}
     - target: {fileID: 4724042034239532, guid: 1bd4b58130f34624d815fbd66e6cc6bb, type: 2}
       propertyPath: m_LocalPosition.z
@@ -458,7 +458,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4724042034239532, guid: 1bd4b58130f34624d815fbd66e6cc6bb, type: 2}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: -0.0044750636
       objectReference: {fileID: 0}
     - target: {fileID: 4724042034239532, guid: 1bd4b58130f34624d815fbd66e6cc6bb, type: 2}
       propertyPath: m_LocalRotation.y
@@ -470,7 +470,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4724042034239532, guid: 1bd4b58130f34624d815fbd66e6cc6bb, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.99999005
       objectReference: {fileID: 0}
     - target: {fileID: 4724042034239532, guid: 1bd4b58130f34624d815fbd66e6cc6bb, type: 2}
       propertyPath: m_RootOrder
@@ -487,6 +487,42 @@ Prefab:
     - target: {fileID: 4724042034239532, guid: 1bd4b58130f34624d815fbd66e6cc6bb, type: 2}
       propertyPath: m_LocalScale.z
       value: 17.720333
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: randomSeed
+      value: -1296937803
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: InitialModule.startSize.scalar
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ShapeModule.type
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4724042034239532, guid: 1bd4b58130f34624d815fbd66e6cc6bb, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -0.513
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ShapeModule.radius.value
+      value: 2.4712965
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ShapeModule.angle
+      value: 10.211821
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
