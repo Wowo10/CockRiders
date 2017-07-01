@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerBehaviour : MonoBehaviour
 {
-
     public int playernumber;
     public float speed = 10.0f;
     public float friction = 0.05f;
@@ -52,8 +49,5 @@ public class PlayerBehaviour : MonoBehaviour
             if (rb.velocity.x < 0)
                 rb.velocity = Vector3.zero;
         }
-
     }
-
-
 }
