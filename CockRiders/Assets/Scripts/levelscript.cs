@@ -18,7 +18,6 @@ public class levelscript : MonoBehaviour {
         {
             foreach (var player in players)
             {
-                //Debug.Log(player.name + " " + player.currentanswer);
 
                 if (player.currentanswer == quiz.actualanswer)
                     player.WinQuiz();

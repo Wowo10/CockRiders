@@ -67,8 +67,6 @@ public class Quiz : MonoBehaviour {
 
         questionsstrings = questionsstrings.Skip(1).ToArray(); //labels
 
-        //Debug.Log(questions.Length);
-
         questions = new List<Question>();
 
         foreach (var qs in questionsstrings)
@@ -101,6 +99,8 @@ public class Quiz : MonoBehaviour {
         texts[1].text = questions[index].aans;
         texts[2].text = questions[index].bans;
         texts[3].text = questions[index].cans;
+
+        actualanswer = questions[index].correct[0]; //should be one character actually
 
         timeleft = 10.0f;
     }
