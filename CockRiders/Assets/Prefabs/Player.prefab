@@ -79,7 +79,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 31.125, y: 31.125}
+    oldSize: {x: 39.84, y: 39.84}
     newSize: {x: 49.8, y: 49.8}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -104,6 +104,10 @@ MonoBehaviour:
   friction: 0.1
   maxvelocity: 10
   startvelocity: 0
+  currentanswer: 0
+  jumpHeight: 20
+  jumpForce: 32
+  groundLevelY: 0
 --- !u!212 &212336747110290284
 SpriteRenderer:
   m_ObjectHideFlags: 1
