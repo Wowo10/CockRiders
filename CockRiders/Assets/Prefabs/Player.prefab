@@ -136,6 +136,7 @@ MonoBehaviour:
   maxvelocity: 10
   startvelocity: 0
   currentanswer: 0
+
 --- !u!198 &198377790077683266
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -3313,6 +3314,10 @@ ParticleSystemRenderer:
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
+  jumpHeight: 20
+  jumpForce: 32
+  groundLevelY: 0
+
 --- !u!212 &212336747110290284
 SpriteRenderer:
   m_ObjectHideFlags: 1

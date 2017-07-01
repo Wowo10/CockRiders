@@ -7,14 +7,18 @@ public class PlayerBehaviour : MonoBehaviour
     public float friction = 0.05f;
     public float maxvelocity = 10.0f; //times that max velocity is bigger that speed
     public float startvelocity = 0.0f;
-
-    public char currentanswer='0';
+    public char currentanswer = '0';
+    public float jumpHeight = 20.0f;
+    public float jumpForce = 10.0f;
+    
+    public float groundLevelY;
 
     string fire, jump, aans, bans, cans;
     Rigidbody2D rb;
 
     void Start()
     {
+        groundLevelY = transform.position.y;
         fire = "Fire" + (playernumber + 1);
         jump = "Jump" + (playernumber + 1);
         aans = "Aanswer" + (playernumber + 1);
@@ -39,6 +43,18 @@ public class PlayerBehaviour : MonoBehaviour
         {
             Debug.Log(name + " won!!!!!!1111one");
         }
+        if (collision.CompareTag("Obstacle"))
+        {
+            if(rb.velocity.y <= 0.0f + Mathf.Epsilon)
+                OnObstacleHit();
+        }
+    }
+
+
+    private void OnObstacleHit()
+    {
+        Debug.Log(name + " is retarded");
+        //TODO
     }
 
     void FixedUpdate()
@@ -53,17 +69,26 @@ public class PlayerBehaviour : MonoBehaviour
             rb.velocity += Vector2.right * speed * friction * -1;
 
             if (rb.velocity.x < 0)
-                rb.velocity = Vector3.zero;
+                rb.velocity = new Vector3(0, rb.velocity.y, 0);
         }
 
         if (Input.GetButtonDown(jump))
         {
-            //some timer and jump mechanic
+            if (rb.velocity.y >= 0.0f - Mathf.Epsilon && rb.velocity.y <= 0.0f + Mathf.Epsilon)
+                OnJump();
         }
-        else
+
+
+        if(transform.position.y > groundLevelY)
         {
-            //callback?
+            rb.AddForce(new Vector2(0, -30.81f), ForceMode2D.Force);
         }
+        else if (transform.position.y < groundLevelY)
+        {
+            transform.SetPositionAndRotation(new Vector3(transform.position.x, groundLevelY, transform.position.z), Quaternion.identity);
+            rb.velocity = new Vector3(rb.velocity.x, 0, 0); ;
+        }
+
 
         if (Input.GetButtonDown(aans))
         {
@@ -93,4 +118,8 @@ public class PlayerBehaviour : MonoBehaviour
         currentanswer = '0';
     }
 
+    private void OnJump()
+    {
+        rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+    }
 }
