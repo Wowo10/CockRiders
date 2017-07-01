@@ -68,6 +68,7 @@ public class PlayerBehaviour : MonoBehaviour
 		{
 			Debug.Log("kek");
 			GameObject.FindGameObjectWithTag("MainCamera").SendMessage("Show"); //showing quiz
+			Destroy(collision.gameObject);
 		}
 	}
 
