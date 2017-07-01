@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerBehaviour : MonoBehaviour {
+public class PlayerBehaviour : MonoBehaviour
+{
 
     public int playernumber;
     public float speed = 10.0f;
@@ -13,7 +14,7 @@ public class PlayerBehaviour : MonoBehaviour {
     string axis;
     Rigidbody2D rb;
 
-    void Start ()
+    void Start()
     {
         axis = "Fire" + (playernumber + 1);
         rb = gameObject.GetComponent<Rigidbody2D>();
@@ -22,10 +23,18 @@ public class PlayerBehaviour : MonoBehaviour {
 
         rb.velocity = gameObject.transform.right * 0 * speed;
     }
-	
-	void Update ()
+
+    void Update()
     {
-        
+
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("FinishLine"))
+        {
+            Debug.Log(name + " won!!!!!!1111one");
+        }
     }
 
     void FixedUpdate()
@@ -43,14 +52,8 @@ public class PlayerBehaviour : MonoBehaviour {
             if (rb.velocity.x < 0)
                 rb.velocity = Vector3.zero;
         }
-        
+
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("FinishLine"))
-        {
-            Debug.Log(name + " won!!!!!!1111one");
-        }
-    }
+
 }
