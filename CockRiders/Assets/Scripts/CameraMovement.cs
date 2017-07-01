@@ -21,7 +21,7 @@ public class CameraMovement : MonoBehaviour
             if (x.transform.position.x > player.position.x)
                 player = x.transform;
         }
-        transform.position = new Vector3(player.position.x + offset.x, player.position.y + offset.y, offset.z); // Camera follows the player with specified offset position
+        transform.position = new Vector3(player.position.x + offset.x, transform.position.y, transform.position.z); // Camera follows the player with specified offset position
     }
 
 }

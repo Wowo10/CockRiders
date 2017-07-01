@@ -106,7 +106,7 @@ MonoBehaviour:
   startvelocity: 0
   currentanswer: 0
   jumpHeight: 20
-  jumpForce: 10
+  jumpForce: 32
   particles: {fileID: 0}
   groundLevelY: 0
   knockedRotation: 30

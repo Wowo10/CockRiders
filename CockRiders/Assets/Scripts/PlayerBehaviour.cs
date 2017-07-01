@@ -19,6 +19,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     private bool isKnocked = false;
     private float maxVelocityTemp;
+    private GameController controller;
     public float knockedTimer = 1.0f;
     public bool isResetingLerp;
 
@@ -27,6 +28,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     void Start()
     {
+        controller = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<GameController>();
         groundLevelY = transform.position.y;
         fire = "Fire" + (playernumber + 1);
         jump = "Jump" + (playernumber + 1);
@@ -51,6 +53,7 @@ public class PlayerBehaviour : MonoBehaviour
         if (collision.CompareTag("FinishLine"))
         {
             Debug.Log(name + " won!!!!!!1111one");
+            controller.isGameStarted = false; //set game finished
         }
         if (collision.CompareTag("Obstacle"))
         {
@@ -77,6 +80,9 @@ public class PlayerBehaviour : MonoBehaviour
 
     void FixedUpdate()
     {
+        //only ticks if game is started (no one has won yet)
+        if (controller.isGameStarted)
+        {
             if (Input.GetButtonDown(fire))
             {
                 float brake = 1 - (rb.velocity.x / maxVelocityTemp);
@@ -106,39 +112,6 @@ public class PlayerBehaviour : MonoBehaviour
                 if (rb.velocity.y >= 0.0f - Mathf.Epsilon && rb.velocity.y <= 0.0f + Mathf.Epsilon)
                     OnJump();
             }
-
-
-            if (transform.position.y > groundLevelY)
-            {
-                rb.AddForce(new Vector2(0, -30.81f), ForceMode2D.Force);
-            }
-            else if (transform.position.y < groundLevelY)
-            {
-                transform.SetPositionAndRotation(new Vector3(transform.position.x, groundLevelY, transform.position.z), Quaternion.identity);
-                rb.velocity = new Vector3(rb.velocity.x, 0, 0); ;
-            }
-            transform.rotation = Quaternion.Slerp(Quaternion.Euler(new Vector3(0, 0, knockedRotation)), Quaternion.identity, knockedTimer);
-
-            if (isKnocked)
-            {
-                knockedTimer -= Time.deltaTime;
-                if (knockedTimer < 0.0f)
-                {
-                    isKnocked = false;
-                    isResetingLerp = true;
-                }
-            }
-            if (isResetingLerp)
-            {
-                if (knockedTimer < 1.0f)
-                    knockedTimer += Time.deltaTime;
-                else
-                {
-                    knockedTimer = 1.0f;
-                    isResetingLerp = false;
-                }
-            }
-
             if (Input.GetButtonDown(aans))
             {
                 currentanswer = 'a';
@@ -153,6 +126,38 @@ public class PlayerBehaviour : MonoBehaviour
             {
                 currentanswer = 'c';
             }
+        }
+        if (transform.position.y > groundLevelY)
+        {
+            rb.AddForce(new Vector2(0, -30.81f), ForceMode2D.Force);
+        }
+        else if (transform.position.y < groundLevelY)
+        {
+            transform.SetPositionAndRotation(new Vector3(transform.position.x, groundLevelY, transform.position.z), Quaternion.identity);
+            rb.velocity = new Vector3(rb.velocity.x, 0, 0); ;
+        }
+        transform.rotation = Quaternion.Slerp(Quaternion.Euler(new Vector3(0, 0, knockedRotation)), Quaternion.identity, knockedTimer);
+
+        if (isKnocked)
+        {
+            knockedTimer -= Time.deltaTime;
+            if (knockedTimer < 0.0f)
+            {
+                isKnocked = false;
+                isResetingLerp = true;
+            }
+        }
+        if (isResetingLerp)
+        {
+            if (knockedTimer < 1.0f)
+                knockedTimer += Time.deltaTime;
+            else
+            {
+                knockedTimer = 1.0f;
+                isResetingLerp = false;
+            }
+        }
+        
     }
 
     public void WinQuiz()
