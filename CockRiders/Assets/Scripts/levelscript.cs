@@ -9,7 +9,7 @@ public class levelscript : MonoBehaviour {
         
 	void Start()
     {
-        quiz.Show();
+
 	}
 	
 	void Update()
@@ -18,7 +18,6 @@ public class levelscript : MonoBehaviour {
         {
             foreach (var player in players)
             {
-
                 if (player.currentanswer == quiz.actualanswer)
                     player.WinQuiz();
                 else
