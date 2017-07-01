@@ -25,4 +25,11 @@ public class levelscript : MonoBehaviour {
             }
         }
 	}
+
+	void Show()
+	{
+		quiz.Show();
+	}
+
+
 }

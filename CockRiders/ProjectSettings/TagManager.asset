@@ -7,6 +7,8 @@ TagManager:
   - Background
   - FinishLine
   - Obstacle
+  - QuizStart
+  - Quiz
   layers:
   - Default
   - TransparentFX

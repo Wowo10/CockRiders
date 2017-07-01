@@ -62,8 +62,16 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+		if (collision.CompareTag("QuizStart"))
+		{
+			Debug.Log("kek");
+			GameObject.FindGameObjectWithTag("MainCamera").SendMessage("Show"); //showing quiz
+		}
+	}
 
-    private void OnObstacleHit()
+	private void OnObstacleHit()
     {
         Debug.Log(name + " is retarded");
         isKnocked = true;
@@ -170,7 +178,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         Debug.Log(name + " has lost");
         currentanswer = '0';
-    }
+    }		
 
     private void OnJump()
     {
