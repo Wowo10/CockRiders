@@ -61,6 +61,13 @@ public class Quiz : MonoBehaviour
 
 	public float quiztimer = 10.0f;
 
+	bool inputdelay = true;
+	public bool InputDelay
+	{
+		get { return inputdelay; }
+		set { inputdelay = value; }
+	}
+
 	bool ended = true;
 	public bool Ended
 	{
