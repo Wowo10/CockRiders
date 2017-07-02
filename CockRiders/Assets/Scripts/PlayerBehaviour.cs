@@ -15,8 +15,9 @@ public class PlayerBehaviour : MonoBehaviour
 
 	public ParticleSystem particles;
 	public ParticleSystem clickerparticles;
+    public AudioClip collisionSound;
 
-	public float groundLevelY;
+    public float groundLevelY;
 	public float knockedRotation = 30.0f;
 
 	private bool isKnocked = false;
@@ -108,7 +109,11 @@ public class PlayerBehaviour : MonoBehaviour
 		isKnocked = true;
 		Invoke("ResetRotation", 1.0f);
 		maxVelocityTemp = 0.5f * maxvelocity;
-	}
+        AudioSource audiosource;
+        audiosource = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>();
+        audiosource.PlayOneShot(collisionSound);
+
+    }
 
 	private void ResetRotation()
 	{
@@ -205,7 +210,7 @@ public class PlayerBehaviour : MonoBehaviour
 				isKnocked = false;
 				isResetingLerp = true;
 			}
-			transform.rotation = Quaternion.Slerp(Quaternion.Euler(new Vector3(0, 0, knockedRotation)), Quaternion.identity, knockedTimer);
+			transform.rotation = Quaternion.Slerp(Quaternion.Euler(new Vector3(0, knockedRotation / 3, knockedRotation)), Quaternion.identity, knockedTimer);
 		}
 		if (isResetingLerp)
 		{
@@ -216,7 +221,7 @@ public class PlayerBehaviour : MonoBehaviour
 				knockedTimer = 1.0f;
 				isResetingLerp = false;
 			}
-			transform.rotation = Quaternion.Slerp(Quaternion.Euler(new Vector3(0, 0, knockedRotation)), Quaternion.identity, knockedTimer);
+			transform.rotation = Quaternion.Slerp(Quaternion.Euler(new Vector3(0, knockedRotation / 3, knockedRotation)), Quaternion.Euler(new Vector3(0,0, 375)), knockedTimer);
 		}
 
 	}
