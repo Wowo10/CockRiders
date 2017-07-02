@@ -94,7 +94,7 @@ public class PlayerBehaviour : MonoBehaviour
         {
             if (Input.GetButtonDown(fire))
             {
-                float brake = 1 - (rb.velocity.x / maxVelocityTemp)/2;
+                float brake = 1 - (rb.velocity.x / maxVelocityTemp);
                 rb.velocity += Vector2.right * speed * brake;
 
                 if (particles != null)

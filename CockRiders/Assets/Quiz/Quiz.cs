@@ -1,14 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Quiz : MonoBehaviour
 {
 
-	[MenuItem("Tools/Read file")]
 	static string ReadString()
 	{
 		string path = "Assets/Quiz/questions.csv";

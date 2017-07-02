@@ -109,6 +109,8 @@ MonoBehaviour:
   jumpForce: 32
   particles: {fileID: 198988221595153714, guid: f73f3813546fae44a9759cbaf150f78b,
     type: 2}
+  clickerparticles: {fileID: 198759373541321540, guid: 8f610dbf6042bb145b0682be2ddcc1c5,
+    type: 2}
   groundLevelY: 0
   knockedRotation: 50
   knockedTimer: 1
