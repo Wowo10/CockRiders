@@ -107,12 +107,13 @@ MonoBehaviour:
   currentanswer: 0
   jumpHeight: 20
   jumpForce: 32
+  animationOffset: 10
   particles: {fileID: 198988221595153714, guid: f73f3813546fae44a9759cbaf150f78b,
     type: 2}
   clickerparticles: {fileID: 198759373541321540, guid: 8f610dbf6042bb145b0682be2ddcc1c5,
     type: 2}
   groundLevelY: 0
-  knockedRotation: 50
+  knockedRotation: -50
   knockedTimer: 1
   isResetingLerp: 0
 --- !u!212 &212336747110290284
