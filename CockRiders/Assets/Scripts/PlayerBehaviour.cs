@@ -32,6 +32,13 @@ public class PlayerBehaviour : MonoBehaviour
 		set { inputdelay = value; }
 	}
 
+	bool haswon = false;
+	public bool HasWon
+	{
+		get { return haswon; }
+		set { haswon = value; }
+	}
+
 	string fire, jump, aans, bans, cans; //axes
 	Rigidbody2D rb;
 
@@ -61,7 +68,7 @@ public class PlayerBehaviour : MonoBehaviour
 	{
 		if (collision.CompareTag("FinishLine"))
 		{
-			Debug.Log(name + " won!!!!!!1111one");
+			haswon = true;
 			controller.isGameStarted = false; //set game finished
 		}
 		if (collision.CompareTag("Obstacle"))
@@ -76,7 +83,9 @@ public class PlayerBehaviour : MonoBehaviour
 		if (collision.CompareTag("QuizStart"))
 		{
 			GameObject.FindGameObjectWithTag("MainCamera").SendMessage("Show"); //showing quiz
-			Destroy(collision.gameObject);
+			//Destroy(collision.gameObject);
+
+			collision.gameObject.SetActive(false);
 		}
 	}
 
@@ -130,17 +139,6 @@ public class PlayerBehaviour : MonoBehaviour
 					rb.velocity = new Vector3(0, rb.velocity.y, 0);
 			}
 
-			/*
-			if (rotateleft)
-			{
-				gameObject.transform.Rotate(Vector3.forward, animangle);
-			}
-			else
-			{
-				gameObject.transform.Rotate(Vector3.forward, -1*animangle);
-			}
-			*/
-
 			if (Input.GetButtonDown(jump))
 			{
 				if (!inputdelay)
@@ -162,6 +160,11 @@ public class PlayerBehaviour : MonoBehaviour
 			if (Input.GetButtonDown(cans))
 			{
 				currentanswer = 'c';
+			}
+
+			if (Input.GetAxis("Cheat") > 0)
+			{
+				rb.velocity = new Vector3(1500, 0, 0);
 			}
 		}
 		if (transform.position.y > groundLevelY)
