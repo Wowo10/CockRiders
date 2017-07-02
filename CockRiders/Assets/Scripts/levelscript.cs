@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class levelscript : MonoBehaviour {
 
     public PlayerBehaviour[] players;
     public Quiz quiz;
 
-	float delay;
+    float delay;
 
 	bool switchdelay = true;
 
@@ -71,6 +72,11 @@ public class levelscript : MonoBehaviour {
 				temp.transform.position = new Vector3(x, y, 0);
 			}
 		}
+
+        AudioSource startaudio;
+        startaudio = GetComponent<AudioSource>();
+        //startaudio.Play();
+        startaudio.Play(3 * 44100);
 	}
 	
 	void Update()

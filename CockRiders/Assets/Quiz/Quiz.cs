@@ -55,7 +55,9 @@ public class Quiz : MonoBehaviour
 
 	}
 
-	List<Question> questions;
+    public List<AudioClip> audiotexts;
+
+    List<Question> questions;
 	public char actualanswer;
 	float timeleft;
 
@@ -111,7 +113,11 @@ public class Quiz : MonoBehaviour
 
 		int index = Random.Range(0, questions.Count - 1);
 
-		texts[0].text = questions[index].quest;
+        AudioSource audiosource;
+        audiosource = GetComponent<AudioSource>();
+        audiosource.PlayOneShot(audiotexts[index]);
+
+        texts[0].text = questions[index].quest;
 		texts[1].text = questions[index].aans;
 		texts[2].text = questions[index].bans;
 		texts[3].text = questions[index].cans;
@@ -123,6 +129,7 @@ public class Quiz : MonoBehaviour
 		ended = false;
 
 		questions.Remove(questions[index]);
+        audiotexts.Remove(audiotexts[index]);
 	}
 	
 	public bool IsEnd()
