@@ -1774,7 +1774,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1030011292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2294,6 +2294,9 @@ MonoBehaviour:
   - {fileID: 1123909320}
   - {fileID: 601503771}
   quiz: {fileID: 862225761}
+  splashscreen: {fileID: 1189030573}
+  clickerparticles: {fileID: 198759373541321540, guid: 8f610dbf6042bb145b0682be2ddcc1c5,
+    type: 2}
   backgroundlayers:
   - {fileID: 460195911}
   - {fileID: 1084722584}
