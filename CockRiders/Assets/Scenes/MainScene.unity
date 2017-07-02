@@ -2295,6 +2295,7 @@ MonoBehaviour:
   - {fileID: 601503771}
   quiz: {fileID: 862225761}
   splashscreen: {fileID: 1189030573}
+  counting: {fileID: 8300000, guid: 0a31364bc8f8641439795bb0a2d46cb8, type: 3}
   clickerparticles: {fileID: 198759373541321540, guid: 8f610dbf6042bb145b0682be2ddcc1c5,
     type: 2}
   backgroundlayers:

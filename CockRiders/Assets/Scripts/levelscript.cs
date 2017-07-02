@@ -4,12 +4,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(AudioSource))]
-public class levelscript : MonoBehaviour {
+public class levelscript : MonoBehaviour
+{
 
-    public PlayerBehaviour[] players;
-    public Quiz quiz;
+	public PlayerBehaviour[] players;
+	public Quiz quiz;
 
 	public GameObject splashscreen;
+	public AudioClip counting;
 
 	public ParticleSystem clickerparticles;
 
@@ -31,7 +33,7 @@ public class levelscript : MonoBehaviour {
 	Vector3[] Positions;
 
 	void Start()
-    {
+	{
 		Positions = new Vector3[players.Length];
 
 		QuizTriggers = GameObject.FindGameObjectsWithTag("QuizStart");
@@ -41,7 +43,7 @@ public class levelscript : MonoBehaviour {
 		}
 
 		foreach (var bglayer in backgroundlayers)
-		{							
+		{
 			for (int i = 0; i < 1600; i++)
 			{
 				GameObject temp = new GameObject();
@@ -70,12 +72,12 @@ public class levelscript : MonoBehaviour {
 							break;
 					}
 
-					int scale = Random.Range(2,7);
+					int scale = Random.Range(2, 7);
 
 					temp.transform.localScale = new Vector3(scale, scale, 0);
 				}
 				else
-				{				
+				{
 					if (Random.Range(0, 2) == 0)
 					{
 						temp = Instantiate(star1, bglayer.transform);
@@ -84,7 +86,7 @@ public class levelscript : MonoBehaviour {
 					{
 						temp = Instantiate(star2, bglayer.transform);
 					}
-				}				
+				}
 
 				float x = Random.Range(-300, 9000);
 				float y = Random.Range(-105, 105);
@@ -92,24 +94,36 @@ public class levelscript : MonoBehaviour {
 			}
 		}
 
-        AudioSource startaudio;
-        startaudio = GetComponent<AudioSource>();
-        //startaudio.Play();
-        startaudio.Play(3 * 44100);
+		AudioSource startaudio;
+		startaudio = GetComponent<AudioSource>();
+		//startaudio.Play();
+		startaudio.Play(3 * 44100);
 	}
-	
+
 	void Update()
-    {
-		if(quiz.IsEnd())
-        {
-            foreach (var player in players)
-            {
-                if (player.currentanswer == quiz.actualanswer)
-                    player.WinQuiz();
-                else
-                    player.LoseQuiz();
-            }
-        }
+	{
+		if (quiz.IsEnding())
+		{
+			foreach (var player in players)
+			{
+				player.CanVote = false;
+			}
+		}
+
+		if (quiz.IsEnd())
+		{
+			foreach (var player in players)
+			{
+				if (player.currentanswer == quiz.actualanswer)
+					player.WinQuiz();
+				else
+					player.LoseQuiz();
+
+				player.CanVote = true;
+			}
+		}
+
+
 
 		float delta = Time.deltaTime;
 
@@ -179,6 +193,11 @@ public class levelscript : MonoBehaviour {
 	{
 		delay = 3.0f;
 		switchdelay = false;
+
+		//vo
+		AudioSource audiosource;
+		audiosource = GetComponent<AudioSource>();
+		audiosource.PlayOneShot(counting);
 	}
 
 }

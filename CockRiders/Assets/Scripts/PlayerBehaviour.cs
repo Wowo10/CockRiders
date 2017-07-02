@@ -11,7 +11,7 @@ public class PlayerBehaviour : MonoBehaviour
 	public char currentanswer = '0';
 	public float jumpHeight = 20.0f;
 	public float jumpForce = 10.0f;
-    public float animationOffset = 30;
+	public float animationOffset = 30;
 
 	public ParticleSystem particles;
 	public ParticleSystem clickerparticles;
@@ -37,6 +37,14 @@ public class PlayerBehaviour : MonoBehaviour
 	{
 		get { return haswon; }
 		set { haswon = value; }
+	}
+
+	bool canvote = true;
+
+	public bool CanVote
+	{
+		get { return canvote; }
+		set { canvote = value; }
 	}
 
 	string fire, jump, aans, bans, cans; //axes
@@ -83,7 +91,7 @@ public class PlayerBehaviour : MonoBehaviour
 		if (collision.CompareTag("QuizStart"))
 		{
 			GameObject.FindGameObjectWithTag("MainCamera").SendMessage("Show"); //showing quiz
-			//Destroy(collision.gameObject);
+																				//Destroy(collision.gameObject);
 
 			collision.gameObject.SetActive(false);
 		}
@@ -126,10 +134,10 @@ public class PlayerBehaviour : MonoBehaviour
 
 					Destroy(ps.gameObject, ps.main.duration);
 				}
-                if (!isKnocked)
-                {
-                    Animate();
-                }
+				if (!isKnocked)
+				{
+					Animate();
+				}
 			}
 			else
 			{
@@ -147,19 +155,22 @@ public class PlayerBehaviour : MonoBehaviour
 						OnJump();
 				}
 			}
-			if (Input.GetButtonDown(aans))
+			if (canvote)
 			{
-				currentanswer = 'a';
-			}
+				if (Input.GetButtonDown(aans))
+				{
+					currentanswer = 'a';
+				}
 
-			if (Input.GetButtonDown(bans))
-			{
-				currentanswer = 'b';
-			}
+				if (Input.GetButtonDown(bans))
+				{
+					currentanswer = 'b';
+				}
 
-			if (Input.GetButtonDown(cans))
-			{
-				currentanswer = 'c';
+				if (Input.GetButtonDown(cans))
+				{
+					currentanswer = 'c';
+				}
 			}
 
 			if (Input.GetAxis("Cheat") > 0)
@@ -176,7 +187,7 @@ public class PlayerBehaviour : MonoBehaviour
 			transform.SetPositionAndRotation(new Vector3(transform.position.x, groundLevelY, transform.position.z), Quaternion.identity);
 			rb.velocity = new Vector3(rb.velocity.x, 0, 0); ;
 		}
-		
+
 
 		if (isKnocked)
 		{
@@ -186,8 +197,8 @@ public class PlayerBehaviour : MonoBehaviour
 				isKnocked = false;
 				isResetingLerp = true;
 			}
-            transform.rotation = Quaternion.Slerp(Quaternion.Euler(new Vector3(0, 0, knockedRotation)), Quaternion.identity, knockedTimer);
-        }
+			transform.rotation = Quaternion.Slerp(Quaternion.Euler(new Vector3(0, 0, knockedRotation)), Quaternion.identity, knockedTimer);
+		}
 		if (isResetingLerp)
 		{
 			if (knockedTimer < 1.0f)
@@ -197,8 +208,8 @@ public class PlayerBehaviour : MonoBehaviour
 				knockedTimer = 1.0f;
 				isResetingLerp = false;
 			}
-            transform.rotation = Quaternion.Slerp(Quaternion.Euler(new Vector3(0, 0, knockedRotation)), Quaternion.identity, knockedTimer);
-        }
+			transform.rotation = Quaternion.Slerp(Quaternion.Euler(new Vector3(0, 0, knockedRotation)), Quaternion.identity, knockedTimer);
+		}
 
 	}
 
@@ -227,10 +238,10 @@ public class PlayerBehaviour : MonoBehaviour
 		rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
 	}
 
-    private void Animate()
-    {
-        animationOffset *= -1;
-        transform.rotation = Quaternion.Euler(0, 0, animationOffset);
-    }
+	private void Animate()
+	{
+		animationOffset *= -1;
+		transform.rotation = Quaternion.Euler(0, 0, animationOffset);
+	}
 
 }

@@ -57,6 +57,8 @@ public class Quiz : MonoBehaviour
 
     public List<AudioClip> audiotexts;
 
+	Color stablecolor;
+
     List<Question> questions;
 	public char actualanswer;
 	float timeleft;
@@ -77,6 +79,8 @@ public class Quiz : MonoBehaviour
 		set { ended = value; }
 	}
 
+	bool checking = false;
+
 	void Start()
 	{
 		string temp = ReadString();
@@ -93,6 +97,8 @@ public class Quiz : MonoBehaviour
 		}
 
 		gameObject.SetActive(false);
+
+		stablecolor = gameObject.GetComponent<Image>().color;
 	}
 
 	void Update()
@@ -130,8 +136,26 @@ public class Quiz : MonoBehaviour
 
 		questions.Remove(questions[index]);
         audiotexts.Remove(audiotexts[index]);
+
+		checking = true;
 	}
-	
+
+	public bool IsEnding()
+	{
+		//Debug.Log(timeleft+ " " + (timeleft <= 4.0f));
+
+		if (timeleft <= 4.0f && checking)
+		{
+			gameObject.GetComponent<Image>().color = new Color(17, 25, 75, 0); //11194BFF 
+
+			return true;
+		}
+
+		gameObject.GetComponent<Image>().color = stablecolor;		
+
+		return false;
+	}
+
 	public bool IsEnd()
 	{
 		if (timeleft <= 0 && !ended)
