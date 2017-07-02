@@ -116,7 +116,6 @@ public class PlayerBehaviour : MonoBehaviour
 
 					Destroy(ps.gameObject, ps.main.duration);
 				}
-
 			}
 			else
 			{
@@ -125,6 +124,17 @@ public class PlayerBehaviour : MonoBehaviour
 				if (rb.velocity.x < 0)
 					rb.velocity = new Vector3(0, rb.velocity.y, 0);
 			}
+
+			/*
+			if (rotateleft)
+			{
+				gameObject.transform.Rotate(Vector3.forward, animangle);
+			}
+			else
+			{
+				gameObject.transform.Rotate(Vector3.forward, -1*animangle);
+			}
+			*/
 
 			if (Input.GetButtonDown(jump))
 			{
@@ -185,6 +195,9 @@ public class PlayerBehaviour : MonoBehaviour
 	public void WinQuiz()
 	{
 		currentanswer = '0';
+
+		//bonus
+		rb.velocity += Vector2.right * speed * 5;
 
 		ParticleSystem ps;
 

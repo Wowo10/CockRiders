@@ -49,6 +49,10 @@ public class levelscript : MonoBehaviour {
 							temp = Instantiate(planets[5], bglayer.transform);
 							break;
 					}
+
+					int scale = Random.Range(2,7);
+
+					temp.transform.localScale = new Vector3(scale, scale, 0);
 				}
 				else
 				{				
