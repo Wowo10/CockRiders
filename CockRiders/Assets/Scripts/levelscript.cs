@@ -104,6 +104,8 @@ public class levelscript : MonoBehaviour
 	{
 		if (quiz.IsEnding())
 		{
+			Debug.Log("nie można!");
+
 			foreach (var player in players)
 			{
 				player.CanVote = false;
@@ -112,6 +114,7 @@ public class levelscript : MonoBehaviour
 
 		if (quiz.IsEnd())
 		{
+			Debug.Log("można!");
 			foreach (var player in players)
 			{
 				if (player.currentanswer == quiz.actualanswer)
@@ -121,9 +124,8 @@ public class levelscript : MonoBehaviour
 
 				player.CanVote = true;
 			}
+
 		}
-
-
 
 		float delta = Time.deltaTime;
 

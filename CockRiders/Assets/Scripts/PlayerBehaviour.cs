@@ -94,12 +94,17 @@ public class PlayerBehaviour : MonoBehaviour
 																				//Destroy(collision.gameObject);
 
 			collision.gameObject.SetActive(false);
+
+			foreach( var item in GameObject.FindObjectsOfType<PlayerBehaviour>())
+			{
+				item.CanVote = true;
+			}
 		}
 	}
 
 	private void OnObstacleHit()
 	{
-		Debug.Log(name + " is retarded");
+		//Debug.Log(name + " is retarded");
 		isKnocked = true;
 		Invoke("ResetRotation", 1.0f);
 		maxVelocityTemp = 0.5f * maxvelocity;
@@ -114,6 +119,9 @@ public class PlayerBehaviour : MonoBehaviour
 
 	void FixedUpdate()
 	{
+		//Debug.Log(name+" "+canvote);
+
+
 		//only ticks if game is started (no one has won yet)
 		if (controller.isGameStarted)
 		{
@@ -226,11 +234,13 @@ public class PlayerBehaviour : MonoBehaviour
 		ps.transform.position = gameObject.transform.position;
 
 		Destroy(ps.gameObject, ps.main.duration);
+		canvote = true;
 	}
 
 	public void LoseQuiz()
 	{
 		currentanswer = '0';
+		canvote = true;
 	}
 
 	private void OnJump()

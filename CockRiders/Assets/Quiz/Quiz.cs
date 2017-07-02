@@ -137,14 +137,11 @@ public class Quiz : MonoBehaviour
 		questions.Remove(questions[index]);
         audiotexts.Remove(audiotexts[index]);
 
-		checking = true;
 	}
 
 	public bool IsEnding()
 	{
-		//Debug.Log(timeleft+ " " + (timeleft <= 4.0f));
-
-		if (timeleft <= 4.0f && checking)
+		if (timeleft <= 4.0f)
 		{
 			gameObject.GetComponent<Image>().color = new Color(17, 25, 75, 0); //11194BFF 
 
