@@ -1,11 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
+[RequireComponent(typeof(AudioSource))]
 public class levelscript : MonoBehaviour {
 
     public PlayerBehaviour[] players;
     public Quiz quiz;
+
+	public GameObject splashscreen;
+
+	public ParticleSystem clickerparticles;
 
 	float delay;
 
@@ -17,9 +23,23 @@ public class levelscript : MonoBehaviour {
 	public GameObject star2;
 
 	public GameObject[] planets;
+	float wintimer = 0;
+	bool playerwon;
+
+	//starting data
+	GameObject[] QuizTriggers;
+	Vector3[] Positions;
 
 	void Start()
     {
+		Positions = new Vector3[players.Length];
+
+		QuizTriggers = GameObject.FindGameObjectsWithTag("QuizStart");
+		for (int i = 0; i < players.Length; i++)
+		{
+			Positions[i] = players[i].transform.position;
+		}
+
 		foreach (var bglayer in backgroundlayers)
 		{							
 			for (int i = 0; i < 1600; i++)
@@ -71,6 +91,11 @@ public class levelscript : MonoBehaviour {
 				temp.transform.position = new Vector3(x, y, 0);
 			}
 		}
+
+        AudioSource startaudio;
+        startaudio = GetComponent<AudioSource>();
+        //startaudio.Play();
+        startaudio.Play(3 * 44100);
 	}
 	
 	void Update()
@@ -86,9 +111,18 @@ public class levelscript : MonoBehaviour {
             }
         }
 
-		delay -= Time.deltaTime;
+		float delta = Time.deltaTime;
 
-		if(delay <= 0 && !switchdelay)
+		wintimer -= delta;
+		delay -= delta;
+
+		if (playerwon && wintimer <= 0)
+		{
+			Restart();
+		}
+
+
+		if (delay <= 0 && !switchdelay)
 		{
 			foreach (var player in players)
 			{
@@ -97,6 +131,43 @@ public class levelscript : MonoBehaviour {
 
 			quiz.InputDelay = false;
 		}
+
+		for (int i = 0; i < players.Length; i++)
+		{
+			if (players[i].HasWon && !playerwon)
+			{
+				wintimer = 7.0f;
+				playerwon = true;
+				for (int j = 0; j < 4; j++)
+				{
+					ParticleSystem ps;
+
+					ps = Instantiate(clickerparticles, players[i].transform);
+					ps.transform.position = gameObject.transform.position;
+
+					Destroy(ps.gameObject, ps.main.duration);
+				}
+			}
+		}
+
+	}
+
+	void Restart()
+	{
+		splashscreen.SetActive(true);
+
+		foreach (var item in QuizTriggers)
+		{
+			item.SetActive(true);
+			for (int i = 0; i < players.Length; i++)
+			{
+				players[i].transform.position = Positions[i];
+				players[i].GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+				players[i].HasWon = false;
+			}
+		}
+
+		SceneManager.LoadScene("MainScene");
 	}
 
 	void Show()
