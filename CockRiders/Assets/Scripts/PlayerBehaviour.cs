@@ -11,6 +11,7 @@ public class PlayerBehaviour : MonoBehaviour
 	public char currentanswer = '0';
 	public float jumpHeight = 20.0f;
 	public float jumpForce = 10.0f;
+    public float animationOffset = 30;
 
 	public ParticleSystem particles;
 	public ParticleSystem clickerparticles;
@@ -116,6 +117,10 @@ public class PlayerBehaviour : MonoBehaviour
 
 					Destroy(ps.gameObject, ps.main.duration);
 				}
+                if (!isKnocked)
+                {
+                    Animate();
+                }
 			}
 			else
 			{
@@ -168,7 +173,7 @@ public class PlayerBehaviour : MonoBehaviour
 			transform.SetPositionAndRotation(new Vector3(transform.position.x, groundLevelY, transform.position.z), Quaternion.identity);
 			rb.velocity = new Vector3(rb.velocity.x, 0, 0); ;
 		}
-		transform.rotation = Quaternion.Slerp(Quaternion.Euler(new Vector3(0, 0, knockedRotation)), Quaternion.identity, knockedTimer);
+		
 
 		if (isKnocked)
 		{
@@ -178,7 +183,8 @@ public class PlayerBehaviour : MonoBehaviour
 				isKnocked = false;
 				isResetingLerp = true;
 			}
-		}
+            transform.rotation = Quaternion.Slerp(Quaternion.Euler(new Vector3(0, 0, knockedRotation)), Quaternion.identity, knockedTimer);
+        }
 		if (isResetingLerp)
 		{
 			if (knockedTimer < 1.0f)
@@ -188,7 +194,8 @@ public class PlayerBehaviour : MonoBehaviour
 				knockedTimer = 1.0f;
 				isResetingLerp = false;
 			}
-		}
+            transform.rotation = Quaternion.Slerp(Quaternion.Euler(new Vector3(0, 0, knockedRotation)), Quaternion.identity, knockedTimer);
+        }
 
 	}
 
@@ -216,4 +223,11 @@ public class PlayerBehaviour : MonoBehaviour
 	{
 		rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
 	}
+
+    private void Animate()
+    {
+        animationOffset *= -1;
+        transform.rotation = Quaternion.Euler(0, 0, animationOffset);
+    }
+
 }
