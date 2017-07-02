@@ -105,7 +105,6 @@ public class PlayerBehaviour : MonoBehaviour
 
 	private void OnObstacleHit()
 	{
-		//Debug.Log(name + " is retarded");
 		isKnocked = true;
 		Invoke("ResetRotation", 1.0f);
 		maxVelocityTemp = 0.5f * maxvelocity;
@@ -124,9 +123,6 @@ public class PlayerBehaviour : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		//Debug.Log(name+" "+canvote);
-
-
 		//only ticks if game is started (no one has won yet)
 		if (controller.isGameStarted)
 		{
@@ -235,7 +231,7 @@ public class PlayerBehaviour : MonoBehaviour
 
 		ParticleSystem ps;
 
-		ps = Instantiate(clickerparticles);
+		ps = Instantiate(clickerparticles,gameObject.transform);
 		ps.transform.position = gameObject.transform.position;
 
 		AudioSource audiosource;
