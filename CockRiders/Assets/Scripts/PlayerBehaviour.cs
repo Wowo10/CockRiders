@@ -15,9 +15,10 @@ public class PlayerBehaviour : MonoBehaviour
 
 	public ParticleSystem particles;
 	public ParticleSystem clickerparticles;
-    public AudioClip collisionSound;
+	public AudioClip collisionSound;
+	public AudioClip powerupcock;
 
-    public float groundLevelY;
+	public float groundLevelY;
 	public float knockedRotation = 30.0f;
 
 	private bool isKnocked = false;
@@ -92,7 +93,6 @@ public class PlayerBehaviour : MonoBehaviour
 		if (collision.CompareTag("QuizStart"))
 		{
 			GameObject.FindGameObjectWithTag("MainCamera").SendMessage("Show"); //showing quiz
-																				//Destroy(collision.gameObject);
 
 			collision.gameObject.SetActive(false);
 
@@ -142,8 +142,8 @@ public class PlayerBehaviour : MonoBehaviour
 				{
 					ParticleSystem ps;
 
-					ps = Instantiate(particles, gameObject.transform);
-					ps.transform.position = gameObject.transform.position + new Vector3(-15, 0, 0);
+					ps = Instantiate(particles);
+					ps.transform.position = gameObject.transform.position;
 
 					Destroy(ps.gameObject, ps.main.duration);
 				}
@@ -235,8 +235,12 @@ public class PlayerBehaviour : MonoBehaviour
 
 		ParticleSystem ps;
 
-		ps = Instantiate(clickerparticles, gameObject.transform);
+		ps = Instantiate(clickerparticles);
 		ps.transform.position = gameObject.transform.position;
+
+		AudioSource audiosource;
+		audiosource = GetComponent<AudioSource>();
+		audiosource.PlayOneShot(powerupcock);
 
 		Destroy(ps.gameObject, ps.main.duration);
 		canvote = true;

@@ -113,6 +113,7 @@ MonoBehaviour:
   clickerparticles: {fileID: 198759373541321540, guid: 8f610dbf6042bb145b0682be2ddcc1c5,
     type: 2}
   collisionSound: {fileID: 8300000, guid: b1873e5cd6c143e4a9a6b06cc6a49074, type: 3}
+  powerupcock: {fileID: 8300000, guid: cbfcbc5fcfb9b534fb18dc3ca7d4e76f, type: 3}
   groundLevelY: 0
   knockedRotation: -179
   knockedTimer: 1
