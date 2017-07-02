@@ -67,7 +67,6 @@ public class PlayerBehaviour : MonoBehaviour
 	{
 		if (collision.CompareTag("QuizStart"))
 		{
-			Debug.Log("kek");
 			GameObject.FindGameObjectWithTag("MainCamera").SendMessage("Show"); //showing quiz
 			Destroy(collision.gameObject);
 		}
@@ -172,7 +171,6 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void WinQuiz()
     {
-        Debug.Log(name + " has won");
         currentanswer = '0';
 
 		ParticleSystem ps;
@@ -185,7 +183,6 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void LoseQuiz()
     {
-        Debug.Log(name + " has lost");
         currentanswer = '0';
     }		
 
