@@ -12,9 +12,10 @@ public class PlayerBehaviour : MonoBehaviour
     public float jumpHeight = 20.0f;
     public float jumpForce = 10.0f;
 
-    public ParticleSystem particles;
-    
-    public float groundLevelY;
+	public ParticleSystem particles;
+	public ParticleSystem clickerparticles;
+
+	public float groundLevelY;
     public float knockedRotation = 30.0f;
 
     private bool isKnocked = false;
@@ -23,7 +24,7 @@ public class PlayerBehaviour : MonoBehaviour
     public float knockedTimer = 1.0f;
     public bool isResetingLerp;
 
-    string fire, jump, aans, bans, cans;
+    string fire, jump, aans, bans, cans; //axes
     Rigidbody2D rb;
 
     void Start()
@@ -94,7 +95,7 @@ public class PlayerBehaviour : MonoBehaviour
         {
             if (Input.GetButtonDown(fire))
             {
-                float brake = 1 - (rb.velocity.x / maxVelocityTemp);
+                float brake = 1 - (rb.velocity.x / maxVelocityTemp)/2;
                 rb.velocity += Vector2.right * speed * brake;
 
                 if (particles != null)
@@ -102,7 +103,7 @@ public class PlayerBehaviour : MonoBehaviour
                     ParticleSystem ps;
 
                     ps = Instantiate(particles, gameObject.transform);
-                    ps.transform.position = gameObject.transform.position;
+                    ps.transform.position = gameObject.transform.position + new Vector3(-15,0,0);
 
                     Destroy(ps.gameObject, ps.main.duration);
                 }
@@ -173,7 +174,14 @@ public class PlayerBehaviour : MonoBehaviour
     {
         Debug.Log(name + " has won");
         currentanswer = '0';
-    }
+
+		ParticleSystem ps;
+
+		ps = Instantiate(clickerparticles, gameObject.transform);
+		ps.transform.position = gameObject.transform.position;
+
+		Destroy(ps.gameObject, ps.main.duration);
+	}
 
     public void LoseQuiz()
     {
